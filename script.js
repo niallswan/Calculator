@@ -2,7 +2,10 @@
 let runningTotal = 0;
 let buffer = "0";
 let previousOperator;
+//For keeping current number on display when pressing symbol
 let currentlyCalculating = false;
+//For erasing the number from previous calculation on press of a number
+let calculationFinished = false;
 
 //Screen
 const screen= document.querySelector('.screen');
@@ -23,6 +26,7 @@ function handleSymbol(symbol){
         case 'C':
             buffer = '0';
             runningTotal = 0;
+            currentlyCalculating = false;
             break;
         case '=':
             if(previousOperator === null){
@@ -33,6 +37,7 @@ function handleSymbol(symbol){
             buffer = runningTotal;
             runningTotal = 0;
             currentlyCalculating = false;
+            calculationFinished = true;
             break;
         case '←':
             if(buffer.length === 1){
@@ -40,6 +45,7 @@ function handleSymbol(symbol){
             }else{
                 buffer = buffer.substring(0, buffer.length - 1);
             }
+            currentlyCalculating = false;
             break;
         case '+':
         case '−':
@@ -52,9 +58,10 @@ function handleSymbol(symbol){
 
 //When a number is pressed
 function handleNumber(numberString){
-    if(buffer === "0" || currentlyCalculating === true ){
+    if(buffer === "0" || currentlyCalculating === true || calculationFinished === true){
         buffer = numberString;
         currentlyCalculating = false;
+        calculationFinished = false;
     }else{
         buffer += numberString;
     }
