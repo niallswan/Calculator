@@ -2,6 +2,11 @@
 let runningTotal = 0;
 let buffer = "0";
 let previousOperator;
+//Sounds
+let clickNum = new Audio('/sounds/clickNum.mp3');
+clickNum.volume = 0.3;
+let clickSymbol = new Audio('/sounds/clickSymbol.mp3');
+clickSymbol.volume = 0.3;
 //For keeping current number on display when pressing symbol
 let currentlyCalculating = false;
 //For erasing the number from previous calculation on press of a number
@@ -22,6 +27,7 @@ function buttonClick(value){
 
 //When a symbol is pressed
 function handleSymbol(symbol){
+    clickSymbol.play();
     switch(symbol){
         case 'C':
             buffer = '0';
@@ -58,6 +64,7 @@ function handleSymbol(symbol){
 
 //When a number is pressed
 function handleNumber(numberString){
+    clickNum.play();
     if(buffer === "0" || currentlyCalculating === true || calculationFinished === true){
         buffer = numberString;
         currentlyCalculating = false;
