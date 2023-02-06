@@ -27,6 +27,8 @@ function buttonClick(value){
 
 //When a symbol is pressed
 function handleSymbol(symbol){
+    clickSymbol.pause();
+    clickSymbol.currentTime = 0;
     clickSymbol.play();
     switch(symbol){
         case 'C':
@@ -64,6 +66,8 @@ function handleSymbol(symbol){
 
 //When a number is pressed
 function handleNumber(numberString){
+    clickNum.pause();
+    clickNum.currentTime = 0;
     clickNum.play();
     if(buffer === "0" || currentlyCalculating === true || calculationFinished === true){
         buffer = numberString;
