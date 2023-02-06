@@ -27,7 +27,6 @@ function buttonClick(value){
 
 //When a symbol is pressed
 function handleSymbol(symbol){
-    clickSymbol.play();
     switch(symbol){
         case 'C':
             buffer = '0';
@@ -64,7 +63,6 @@ function handleSymbol(symbol){
 
 //When a number is pressed
 function handleNumber(numberString){
-    clickNum.play();
     if(buffer === "0" || currentlyCalculating === true || calculationFinished === true){
         buffer = numberString;
         currentlyCalculating = false;
@@ -102,6 +100,16 @@ function flushOperation(intBuffer){
     }else if(previousOperator === '÷'){
         runningTotal /= intBuffer;
     }
+}
+
+//Play sound on number key press
+function playClickNum(){
+    clickNum.play();
+}
+
+//Play sounds on symbol key press
+function playClickSymbol(){
+    clickSymbol.play();
 }
 
 //Initialize
